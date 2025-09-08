@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600");
+
+.login-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4vh 2vw;
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 4%;
+  width: 88%;
+  max-width: 42vw;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.login-title {
+  color: var(--bigTexColor);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.login-card input {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 3%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.994);
+  color: var(--textColor);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: none;
+}
+
+.login-card input:focus {
+  border-color: var(--btnColorSoft);
+  box-shadow: var(--background);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 3%;
+  background: linear-gradient(to right, var(--btnColorSoft), var(--btnColorStrong));
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(74, 119, 212, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to right, var(--btnColorStrong), var(--btnColorSoft));
+  box-shadow: 0 6px 16px rgba(74, 119, 212, 0.6);
+  transform: translateY(-0.6vh);
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 14px;
+  color: var(--texColor);
+}
+
+.login-footer a {
+  color: var(--btnColorSoft);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .login-card {
+    width: 70%;
+    max-width: 480px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-card {
+    width: 42%;
+    max-width: 420px;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(3vh);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

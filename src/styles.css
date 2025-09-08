@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --background: #ffc04c89;
+  --bigTexColor: #F35C20;
+  --btnColorSoft: #6eb6de;
+  --btnColorStrong: #4a77d4;
+  --succesColor: #A9EAA9;
+  --errorColor: #E27575;
+  --textColor: #2c3e50;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  height: 100vh;
+}
+
+.auth {
+  background: var(--background);
+}
+
+.kpi-blue {
+  background: #e8f0fe71;
+}
+
+.kpi-green {
+  background: #e6f4ea64;
+}
+
+.kpi-yellow {
+  background: #fff7e065;
+}
+
+.kpi-red {
+  background: #fdecea60;
+}

@@ -1,0 +1,25 @@
+<header [class.hidden]="!(currentUser$ | async)">
+  <div class="container">
+    <h1 class="logo">
+      {{ (currentUser$ | async) ? ((isDashboard ? (currentUser$ | async)?.hospitalName : (currentUser$ | async)?.userName)) : '' }}
+    </h1>
+
+    <nav *ngIf="isDashboard && (currentUser$ | async)">
+      <ul>
+        <li><a routerLink="/dashboard">Inicio</a></li>
+        <li><a routerLink="/dashboard/appointments">Citas</a></li>
+        <li><a routerLink="/dashboard/patients">Pacientes</a></li>
+        <!-- <li><a routerLink="/admin/hospitals">Admin</a></li> -->
+        <li><a href="#" (click)="logout()">Cerrar sesión</a></li>
+      </ul>
+    </nav>
+
+<!--     <nav *ngIf="isAdmin && (currentUser$ | async)">
+      <ul>
+        <li><a routerLink="/admin/hospitals">Hospitals</a></li>
+        <li><a routerLink="/dashboard">Dashboard</a></li>
+        <li><a href="#" (click)="logout()">Logout</a></li>
+      </ul>
+    </nav> -->
+  </div>
+</header>

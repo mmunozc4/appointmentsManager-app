@@ -1,0 +1,24 @@
+<div class="modal-backdrop">
+  <div class="modal small">
+    <header class="modal-header">
+      <h3>Detalle cita</h3>
+      <button class="close" (click)="closeModal(false)">✕</button>
+    </header>
+
+    <div class="content">
+      <p><strong>Paciente:</strong> {{ appointment?.name ?? appointment?.patientName ?? '—' }}</p>
+      <p><strong>Teléfono:</strong> {{ appointment?.mobileNo ?? appointment?.contactNo ?? '—' }}</p>
+      <p><strong>Fecha:</strong> {{ appointment?.appointmentDate ? (appointment.appointmentDate | date:'fullDate') : '—' }}</p>
+      <p><strong>Hora:</strong> {{ appointment?.appointmentTime ?? (appointment.appointmentDate ? (appointment.appointmentDate | date:'shortTime') : '—') }}</p>
+      <p><strong>Motivo:</strong> {{ appointment?.naration ?? '—' }}</p>
+      <p><strong>Primera visita:</strong> {{ appointment?.isFirstVisit ? 'Sí' : 'No' }}</p>
+      <p><strong>Estado:</strong> {{ (appointment?.isCompleted || appointment?.isDone) ? 'Hecha' : 'Pendiente' }}</p>
+    </div>
+
+    <footer class="actions">
+      <button (click)="markDone()" [disabled]="loading">Marcar hecha</button>
+      <button (click)="delete()" [disabled]="loading">Eliminar</button>
+      <button (click)="closeModal(false)">Cerrar</button>
+    </footer>
+  </div>
+</div>

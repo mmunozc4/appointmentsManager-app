@@ -1,0 +1,91 @@
+<div class="ap-list body-content card">
+    <div class="ap-header header">
+        <div class="ap-title">
+            <h2>Appointments</h2>
+        </div>
+
+        <div class="ap-actions">
+            <!-- botón con clase del template -->
+            <button class="button primary" routerLink="/dashboard/appointments/new">
+                <i claAss="icon-plus fa-solid fa-plus"></i> Nueva cita
+            </button>
+        </div>
+    </div>
+
+    <div class="ap-filters filters">
+        <div class="filter-item">
+            <label for="search"><i class="fa-solid fa-magnifying-glass"></i> Buscar</label>
+            <input id="search" type="text" placeholder="Nombre o teléfono" [(ngModel)]="q" (input)="applyFilters()" />
+        </div>
+
+        <div class="filter-item">
+            <label for="state"><i class="fa-solid fa-list-check"></i> Estado</label>
+            <select id="state" [(ngModel)]="filterState" (change)="applyFilters()">
+                <option value="all">Todos</option>
+                <option value="pending">Pendientes</option>
+                <option value="done">Hechas</option>
+            </select>
+        </div>
+
+        <div class="filter-item">
+            <label for="dateFrom"><i class="fa-solid fa-calendar-day"></i> Desde</label>
+            <input id="dateFrom" type="date" [(ngModel)]="dateFrom" (change)="applyFilters()" />
+        </div>
+
+        <div class="filter-item">
+            <label for="dateTo"><i class="fa-solid fa-calendar-check"></i> Hasta</label>
+            <input id="dateTo" type="date" [(ngModel)]="dateTo" (change)="applyFilters()" />
+        </div>
+
+        <button class="button-filters" (click)="clearFilters()">
+            <i class="fa-solid fa-eraser"></i> Limpiar
+        </button>
+    </div>
+
+    <div *ngIf="loading" class="ap-loading">Cargando...</div>
+
+    <div *ngIf="!loading" class="table-wrapper">
+        <table class="ap-table" aria-describedby="appointments-list">
+            <thead>
+                <tr>
+                    <th>Paciente</th>
+                    <th>Teléfono</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of filtered" class="row">
+                    <td class="cell-name">{{ a.name ?? a.patientName ?? '—' }}</td>
+                    <td>{{ a.mobileNo ?? a.contactNo ?? '—' }}</td>
+                    <td>{{ a.appointmentDate ? (a.appointmentDate | date:'shortDate') : '—' }}</td>
+                    <td>{{ a.appointmentTime ?? (a.appointmentDate ? (a.appointmentDate | date:'shortTime') : '—') }}
+                    </td>
+                    <td>
+                        <span class="chip" [ngClass]="(a.isCompleted || a.isDone) ? 'chip-done' : 'chip-pending'">
+                            {{ (a.isCompleted || a.isDone) ? 'Hecha' : 'Pendiente' }}
+                        </span>
+                    </td>
+                    <td class="actions-td">
+                        <button class="button icon sm" (click)="openDetail(a)">
+                            <i class="fa-solid fa-eye"></i></button>
+                        <button class="button success sm" (click)="markDone(a)"><i
+                                class="fa-solid fa-check"></i></button>
+                        <button class="button danger sm" (click)="deleteAppointment(a)"><i
+                                class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+
+                <tr *ngIf="filtered.length === 0">
+                    <td colspan="6" class="empty">No hay citas</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <app-appointmens-detail *ngIf="showDetail" [appointment]="selectedAppointment" (close)="onDetailClosed($event)">
+    </app-appointmens-detail>
+</div>

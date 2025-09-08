@@ -1,0 +1,20 @@
+<div class="modal-backdrop">
+  <div class="modal">
+    <header class="modal-header">
+      <h3>Detalle del paciente</h3>
+      <button class="close" (click)="closeModal()">✕</button>
+    </header>
+
+    <div class="detail-grid">
+      <p><strong>Nombre:</strong> {{ patient?.name ?? patient?.fullName }}</p>
+      <p><strong>Teléfono:</strong> {{ patient?.mobileNo ?? patient?.phone }}</p>
+      <p><strong>Ciudad:</strong> {{ patient?.city ?? '—' }}</p>
+      <p><strong>Edad:</strong> {{ patient?.age ?? '—' }}</p>
+      <p><strong>Género:</strong> {{ patient?.gender ?? '—' }}</p>
+    </div>
+
+    <div class="actions">
+      <button (click)="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>

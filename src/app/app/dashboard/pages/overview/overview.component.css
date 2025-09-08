@@ -1,0 +1,106 @@
+.dashboard {
+    padding: 7% 3% 3% 3%;
+    background: #f5f6fa;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2%;
+    margin-bottom: 5%;
+}
+
+.kpi-card {
+    display: flex;
+    align-items: center;
+    gap: 15%;
+    padding: 5%;
+    border-radius: 12px;
+    color: var(--textColor);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.kpi-card h3 {
+    margin-top: 2%;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.kpi-icon {
+    font-size: 125%;
+    margin-left: 5%;
+}
+
+
+
+.tables-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3%;
+}
+
+@media (min-width: 900px) {
+    .tables-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.table-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 3%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table-card h4 {
+    margin-bottom: 5%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #f0f0f0;
+}
+
+th,
+td {
+    padding: 2%;
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+.badge {
+    padding: 0.5% 2%;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.badge-success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.badge-warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.empty-msg {
+    text-align: center;
+    color: #999;
+    padding: 3% 0;
+    font-size: 14px;
+}

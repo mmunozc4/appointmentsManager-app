@@ -1,0 +1,71 @@
+<div class="pt-list">
+    <div class="pt-header">
+        <h2>Pacientes</h2>
+        <div class="pt-actions">
+            <button (click)="openForm()">
+                <i class="fa-solid fa-user-plus"></i> Nuevo paciente
+            </button>
+        </div>
+    </div>
+
+    <div class="pt-filters">
+        <div class="filter-item">
+            <label for="search"><i class="fa-solid fa-magnifying-glass"></i> Buscar</label>
+            <input id="search" placeholder="Nombre o teléfono" [(ngModel)]="q" (input)="applyFilters()" />
+        </div>
+
+        <div class="filter-item">
+            <label for="city"><i class="fa-solid fa-city"></i> Ciudad</label>
+            <input id="city" placeholder="Ciudad" [(ngModel)]="filterCity" (input)="applyFilters()" />
+        </div>
+
+        <button (click)="clearFilters()">
+            <i class="fa-solid fa-eraser"></i> Limpiar
+        </button>
+    </div>
+
+    <div *ngIf="loading" class="pt-loading">Cargando...</div>
+
+    <table class="pt-table" *ngIf="!loading">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Ciudad</th>
+                <th>Edad</th>
+                <th>Género</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of filtered">
+                <td>{{ p.name ?? p.fullName ?? '—' }}</td>
+                <td>{{ p.mobileNo ?? p.phone ?? '—' }}</td>
+                <td>{{ p.city ?? '—' }}</td>
+                <td>{{ p.age ?? '—' }}</td>
+                <td>{{ p.gender ?? '—' }}</td>
+                <td class="actions-td">
+                    <button (click)="openDetail(p)">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button (click)="openForm(p)">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button (click)="deletePatient(p)">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="filtered.length === 0">
+                <td colspan="6" class="empty">No hay pacientes</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modales -->
+    <app-patients-detail *ngIf="showDetail" [patient]="selectedPatient"
+        (close)="onDetailClosed()"></app-patients-detail>
+
+    <app-patients-form *ngIf="showForm" [prefill]="selectedPatient" (saved)="onFormSaved()"
+        (cancel)="showForm=false"></app-patients-form>
+</div>

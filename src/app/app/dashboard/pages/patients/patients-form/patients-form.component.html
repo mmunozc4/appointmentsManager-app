@@ -1,0 +1,45 @@
+<div class="modal-backdrop">
+    <div class="modal">
+        <header class="modal-header">
+            <h3>{{ prefill ? 'Editar paciente' : 'Nuevo paciente' }}</h3>
+            <button class="close" (click)="close()">✕</button>
+        </header>
+
+        <form (ngSubmit)="submit()" [formGroup]="patientForm" class="form-grid">
+            <div class="col">
+                <label>Nombre</label>
+                <input formControlName="name" />
+            </div>
+
+            <div class="col">
+                <label>Teléfono</label>
+                <input formControlName="mobileNo" />
+            </div>
+
+            <div class="col">
+                <label>Ciudad</label>
+                <input formControlName="city" />
+            </div>
+
+            <div class="col">
+                <label>Edad</label>
+                <input type="number" formControlName="age" />
+            </div>
+
+            <div class="col">
+                <label>Género</label>
+                <select formControlName="gender">
+                    <option value="">—</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+
+            <div class="actions full">
+                <button type="submit" [disabled]="loading">Guardar</button>
+                <button type="button" (click)="close()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>

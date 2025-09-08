@@ -1,0 +1,209 @@
+/* Card wrapper */
+.card {
+    background: #f9f9fb;
+    border-radius: 16px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 255, 255, 0.05) inset;
+    padding: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+/* Header */
+.ap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.ap-header h2 {
+    margin: 0;
+    color: #2b2b3a;
+}
+
+.ap-actions button {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 2px 2px 6px rgba(79, 70, 229, 0.3), -2px -2px 6px rgba(99, 102, 241, 0.3);
+    transition: all 0.2s;
+}
+
+.ap-actions button:hover {
+    transform: translateY(-1px);
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filter-item label {
+    font-weight: 600;
+    color: #555;
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.filter-item input,
+.filter-item select {
+    padding: 0.4rem 0.7rem;
+    border-radius: 12px;
+    border: none;
+    background: #f0f0f3;
+    box-shadow: 2px 2px 5px #d1d1d6, -2px -2px 5px #ffffff;
+    transition: all 0.2s;
+}
+
+.filter-item input:focus,
+.filter-item select:focus {
+    box-shadow: inset 2px 2px 4px #d1d1d6, inset -2px -2px 4px #ffffff;
+    outline: none;
+}
+
+.filter-actions button {
+    background: #f0f0f3;
+    color: #2b2b3a;
+    box-shadow: 2px 2px 5px #d1d1d6, -2px -2px 5px #ffffff;
+}
+
+.filter-actions button:hover {
+    background: #6366f1;
+    color: #fff;
+    box-shadow: 2px 2px 8px rgba(79, 70, 229, 0.4), -2px -2px 8px rgba(99, 102, 241, 0.4);
+}
+
+.button-filters {
+    background: #f0f0f3;
+    color: #2b2b3a;
+    box-shadow: 2px 2px 5px #d1d1d6, -2px -2px 5px #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.button-filters:hover {
+    background: #6366f1;
+    color: #fff;
+}
+
+/* Table */
+.ap-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ap-table th,
+.ap-table td {
+    padding: 0.7rem 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.ap-table th {
+    color: #555;
+}
+
+.actions-td button {
+    margin-right: 0.3rem;
+    border-radius: 12px;
+    padding: 0.3rem 0.5rem;
+    border: none;
+    color: #fff;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    box-shadow: 2px 2px 5px rgba(79, 70, 229, 0.3), -2px -2px 5px rgba(99, 102, 241, 0.3);
+    transition: all 0.2s;
+}
+
+.actions-td button.success {
+    background: linear-gradient(135deg, #4ade80, #16a34a);
+    box-shadow: 2px 2px 5px rgba(74, 222, 128, 0.3), -2px -2px 5px rgba(22, 163, 74, 0.3);
+}
+
+.actions-td button.danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    box-shadow: 2px 2px 5px rgba(239, 68, 68, 0.3), -2px -2px 5px rgba(220, 38, 38, 0.3);
+}
+
+/* Chip status */
+.chip {
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.chip-done {
+    background-color: #4ade80;
+    color: #065f46;
+}
+
+.chip-pending {
+    background-color: #facc15;
+    color: #92400e;
+}
+
+/* Empty & Loading */
+.empty {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    padding: 1rem 0;
+}
+
+.ap-loading {
+    text-align: center;
+    padding: 1rem 0;
+    color: #6366f1;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .ap-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .ap-table th,
+    .ap-table td {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.3rem;
+    }
+
+    .actions-td button {
+        margin-bottom: 0.3rem;
+        width: 90%;
+        /* botones ocupan toda la fila */
+    }
+
+    .filter-item {
+        width: 90%;
+        /* cada filtro ocupa toda la fila */
+    }
+
+    .filter-item input,
+    .filter-item select {
+        width: 90%;
+        /* inputs y selects ocupan todo el ancho */
+    }
+
+    .button-filters {
+        width: 90%;
+        /* botón de limpiar ocupa toda la fila */
+    }
+}

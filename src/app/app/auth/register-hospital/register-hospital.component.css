@@ -1,0 +1,141 @@
+.sign-up {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4vh 2vw;
+}
+
+fieldset {
+  border: 1px solid rgba(32, 23, 23, 0.12);
+  border-radius: 10px;
+  box-shadow: 0px 8px 4px 2px rgba(29, 26, 26, 0.56);
+  padding: 4% 4%;
+  width: 92%;
+  max-width: 90vw;
+  margin: 6vh auto;
+  box-sizing: border-box;
+}
+
+input,
+textarea {
+  padding: 3%;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 2%;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--textColor);
+  font-size: 13px;
+}
+
+.action-button {
+  width: 40%;
+  min-width: 28%;
+  background: var(--bigTexColor);
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 1.2% 2%;
+  margin: 1% 1%;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  display: inline-block;
+}
+
+.action-button:hover,
+.action-button:focus {
+  background: var(--background);
+  color: var(--textColor);
+  box-shadow: 0px 0px 0px 2px #fff, 0px 0px 0px 3px var(--bigTexColor);
+}
+
+.fs-title {
+  font-size: 28px;
+  text-transform: uppercase;
+  color: var(--textColor);
+  margin-bottom: 1%;
+}
+
+.fs-subtitle {
+  font-weight: normal;
+  font-size: 18px;
+  color: #666;
+  margin: 1% 0 2% 0;
+}
+
+#divRegistro {
+  background: #f3f3f3;
+  border-radius: 5px;
+  border: 1px solid rgba(32, 23, 23, 0.12);
+  box-shadow: 0px 8px 4px 2px rgba(29, 26, 26, 0.56);
+  width: 94%;
+  margin: 4vh auto;
+  text-align: center;
+  padding: 3%;
+  box-sizing: border-box;
+}
+
+.form__row {
+  margin-bottom: 1.6%;
+}
+
+.success {
+  color: var(--succesColor);
+}
+
+.error {
+  color: var(--errorColor)
+}
+
+.login-link {
+  margin-top: 2%;
+}
+
+.login-link p {
+  margin: 0 0 1% 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.login-button {
+  display: inline-block;
+  color: var(--bigTexColor);
+  font-weight: bold;
+  text-decoration: none;
+  border: 1px solid var(--bigTexColor);
+  border-radius: 4px;
+  padding: 1% 3%;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-button:hover {
+  background-color: var(--bigTexColor);
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  fieldset {
+    width: 80%;
+    padding: 3% 3%;
+  }
+
+  .action-button {
+    width: 28%;
+  }
+}
+
+@media (min-width: 1024px) {
+  fieldset {
+    width: 60%;
+    padding: 2.5% 2.5%;
+  }
+
+  .action-button {
+    width: 20%;
+  }
+}

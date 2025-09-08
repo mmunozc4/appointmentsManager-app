@@ -1,0 +1,84 @@
+<div class="dashboard">
+  <div class="kpi-grid">
+    <div class="kpi-card kpi-blue">
+      <div class="kpi-icon"><i class="fas fa-users"></i></div>
+      <div class="kpi-content">
+        <p>Total Pacientes</p>
+        <h3>{{ totalPatients }}</h3>
+      </div>
+    </div>
+    <div class="kpi-card kpi-green">
+      <div class="kpi-icon"><i class="fas fa-calendar-check"></i></div>
+      <div class="kpi-content">
+        <p>Total Citas</p>
+        <h3>{{ totalAppointments }}</h3>
+      </div>
+    </div>
+    <div class="kpi-card kpi-yellow">
+      <div class="kpi-icon"><i class="fas fa-clock"></i></div>
+      <div class="kpi-content">
+        <p>Citas de Hoy</p>
+        <h3>{{ todaysAppointments }}</h3>
+      </div>
+    </div>
+    <div class="kpi-card kpi-red">
+      <div class="kpi-icon"><i class="fas fa-exclamation-circle"></i></div>
+      <div class="kpi-content">
+        <p>Pendientes</p>
+        <h3>{{ pendingAppointments }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="tables-grid">
+    <div class="table-card">
+      <h4>Próximas citas de hoy</h4>
+      <div *ngIf="upcomingAppointments.length > 0; else noAppts">
+        <table>
+          <thead>
+            <tr>
+              <th>Paciente</th>
+              <th>Hora</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let appt of upcomingAppointments">
+              <td>{{ appt.patientName }}</td>
+              <td>{{ appt.appointmentTime }}</td>
+              <td>
+                <span class="badge" [ngClass]="appt.isCompleted ? 'badge-success' : 'badge-warning'">
+                  {{ appt.isCompleted ? 'Hecha' : 'Pendiente' }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noAppts>
+        <p class="empty-msg">No hay citas para hoy</p>
+      </ng-template>
+    </div>
+
+    <div class="table-card">
+      <h4>Pacientes recientes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Contacto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let patient of recentPatients">
+            <td>{{ patient.patientName }}</td>
+            <td>{{ patient.contactNo }}</td>
+          </tr>
+          <tr *ngIf="recentPatients.length === 0">
+            <td colspan="2" class="empty-msg">No hay pacientes recientes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

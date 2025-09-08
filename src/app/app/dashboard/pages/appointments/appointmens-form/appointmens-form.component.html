@@ -1,0 +1,89 @@
+<div class="modal-backdrop">
+    <div class="modal big">
+        <header class="modal-header">
+            <h3>Nueva cita</h3>
+        </header>
+
+        <form (ngSubmit)="submit()" [formGroup]="appointmentForm">
+            <div class="form-grid">
+
+
+                <div class="col">
+                    <label>Paciente</label>
+                    <input formControlName="name" />
+                </div>
+
+                <div class="col">
+                    <label>Teléfono</label>
+                    <input formControlName="mobileNo" />
+                </div>
+
+                <div class="col">
+                    <label>Ciudad</label>
+                    <input formControlName="city" />
+                </div>
+
+                <div class="col">
+                    <label>Edad</label>
+                    <input type="number" formControlName="age" />
+                </div>
+
+                <div class="col">
+                    <label>Género</label>
+                    <select formControlName="gender">
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <label>Fecha</label>
+                    <input type="date" formControlName="appointmentDate" />
+                </div>
+
+                <div class="col">
+                    <label>Hora</label>
+                    <input type="time" formControlName="appointmentTime" />
+                </div>
+
+                <div class="col">
+                    <label>Primera visita</label>
+                    <select formControlName="isFirstVisit">
+                        <option [ngValue]="true">Sí</option>
+                        <option [ngValue]="false">No</option>
+                    </select>
+                </div>
+
+                <div class="full">
+                    <label>Narración / Motivo</label>
+                    <textarea formControlName="naration"></textarea>
+                </div>
+            </div>
+
+            <div class="actions full">
+                <button type="submit" [disabled]="loading">Guardar</button>
+                <button type="button" routerLink="/dashboard/appointments">Cancelar</button>
+            </div>
+        </form>
+
+        <section class="suggestions">
+            <h4>Pacientes (seleccionar para prefills)</h4>
+            <div class="col full">
+                <input type="text" placeholder="Buscar paciente..." [(ngModel)]="patientSearch"
+                    (input)="filterPatients()" />
+                <select (change)="onPatientSelected($event)">
+                    <option *ngFor="let p of filteredPatients" [value]="p.id">
+                        {{ p.name ?? p.patientName ?? p.fullName }}
+                    </option>
+                </select>
+            </div>
+            <div class="patients-list">
+                <button *ngFor="let p of filteredPatients" type="button" (click)="choosePatient(p)">
+                    {{ p.name ?? p.patientName ?? p.fullName }}
+                </button>
+            </div>
+        </section>
+
+    </div>
+</div>

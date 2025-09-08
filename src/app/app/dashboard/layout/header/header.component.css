@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
+
+.container {
+  width: 92%;
+  max-width: 95vw;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4vw;
+  padding: 1% 0;
+}
+
+header {
+  background: var(--background);
+}
+
+header.hidden {
+  display: none;
+}
+
+.logo {
+  margin: 0;
+  padding: 0.5% 0;
+  font-size: 20px;
+  color: var(--bigTexColor);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60%;
+}
+
+nav {
+  order: 2;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3vw;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+nav li {
+  display: inline-flex;
+  margin: 0;
+  padding-top: 1.6vh;
+  position: relative;
+}
+
+nav a {
+  color: var(--textColor);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  display: inline-block;
+  padding: 0.6vh 0.6vw;
+}
+
+nav a:hover {
+  color: var(--btnColorStrong);
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: var(--btnColorSoft);
+  position: absolute;
+  top: -5px;
+  width: 0%;
+  transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  width: 100%;
+}
+
+@media (max-width: 479px) {
+  .container {
+    gap: 3vw;
+  }
+
+  .logo {
+    font-size: 18px;
+    max-width: 55%;
+  }
+
+  nav ul {
+    gap: 3vw;
+    justify-content: flex-end;
+  }
+
+  nav a {
+    font-size: 13px;
+    padding: 0.8vh 1vw;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 88%;
+    gap: 3vw;
+  }
+
+  .logo {
+    max-width: 50%;
+  }
+
+  nav ul {
+    gap: 2.4vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 80%;
+    gap: 2vw;
+  }
+
+  .logo {
+    max-width: 40%;
+  }
+}

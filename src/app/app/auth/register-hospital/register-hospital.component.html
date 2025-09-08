@@ -1,0 +1,83 @@
+<div class="auth">
+    <main class="sign-up">
+        <div class="sign-up__container" id="divRegistro">
+            <div class="sign-up__content">
+                <header class="sign-up__header">
+                    <h1 class="fs-title">Registrar Hospital</h1>
+                    <h3 class="fs-subtitle">
+                        Por favor ingrese la información del hospital.
+                    </h3>
+                </header>
+
+                <form id="msform" (ngSubmit)="onSubmit()" [formGroup]="hospitalForm">
+                    <ng-container *ngIf="step === 1">
+                        <div>
+                            <div class="form__row">
+                                <input type="text" formControlName="hospitalName" placeholder="Nombre del hospital" />
+                            </div>
+                            <div class="form__row">
+                                <input type="text" formControlName="hospitalAddress" placeholder="Dirección" />
+                            </div>
+                            <div class="form__row">
+                                <input type="text" formControlName="hospitalCity" placeholder="Ciudad" />
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="step === 2">
+                        <div>
+                            <div class="form__row">
+                                <input type="text" formControlName="hospitalContactNo"
+                                    placeholder="Teléfono hospital" />
+                            </div>
+                            <div class="form__row">
+                                <input type="text" formControlName="hospitalOwnerName"
+                                    placeholder="Nombre del propietario" />
+                            </div>
+                            <div class="form__row">
+                                <input type="text" formControlName="hospitalOwnerContactNo"
+                                    placeholder="Teléfono propietario" />
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="step === 3">
+                        <div>
+                            <div class="form__row">
+                                <input type="email" formControlName="hospitalEmailId" placeholder="Email" />
+                            </div>
+                            <div class="form__row">
+                                <input type="text" formControlName="userName" placeholder="Usuario" />
+                            </div>
+                            <div class="form__row">
+                                <input type="password" formControlName="password" placeholder="Contraseña" />
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <div class="form__row form__button">
+                        <button type="button" class="action-button" *ngIf="step > 1" (click)="prevStep()">
+                            Anterior
+                        </button>
+                        <button type="button" class="action-button" *ngIf="step < 3" (click)="nextStep()"
+                            [disabled]="!isStepValid()">
+                            Siguiente
+                        </button>
+                        <button class="action-button" type="submit" *ngIf="step === 3"
+                            [disabled]="hospitalForm.invalid || loading">
+                            {{ loading ? 'Guardando...' : 'Registrar' }}
+                        </button>
+                    </div>
+
+                    <div class="form__row success" *ngIf="successMessage">{{ successMessage }}</div>
+                    <div class="form__row error" *ngIf="errorMessage">{{ errorMessage }}</div>
+                </form>
+
+                <div class="form__row login-link">
+                    <p>¿Ya tienes un hospital registrado?</p>
+                    <a routerLink="/login" class="login-button">Iniciar sesión</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
