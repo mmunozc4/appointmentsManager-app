@@ -4,18 +4,26 @@
             <h3>Nueva cita</h3>
         </header>
 
-        <form (ngSubmit)="submit()" [formGroup]="appointmentForm">
+        <form (ngSubmit)="submit()" [formGroup]="appointmentForm" novalidate>
             <div class="form-grid">
 
-
                 <div class="col">
-                    <label>Paciente</label>
-                    <input formControlName="name" />
+                    <label>Paciente *</label>
+                    <input formControlName="name" [class.invalid]="submitted && f['name'].invalid" />
+                    <div class="error" *ngIf="submitted && f['name'].errors">
+                        <small *ngIf="f['name'].errors['required']">El nombre es obligatorio.</small>
+                        <small *ngIf="f['name'].errors['minlength']">Debe tener al menos 3 caracteres.</small>
+                    </div>
                 </div>
 
                 <div class="col">
-                    <label>Teléfono</label>
-                    <input formControlName="mobileNo" />
+                    <label>Teléfono *</label>
+                    <input formControlName="mobileNo" [class.invalid]="submitted && f['mobileNo'].invalid" />
+                    <div class="error" *ngIf="submitted && f['mobileNo'].errors">
+                        <small *ngIf="f['mobileNo'].errors['required']">El teléfono es obligatorio.</small>
+                        <small *ngIf="f['mobileNo'].errors['pattern']">Formato inválido, solo números (7-15
+                            dígitos).</small>
+                    </div>
                 </div>
 
                 <div class="col">
@@ -25,12 +33,17 @@
 
                 <div class="col">
                     <label>Edad</label>
-                    <input type="number" formControlName="age" />
+                    <input type="number" formControlName="age" [class.invalid]="submitted && f['age'].invalid" />
+                    <div class="error" *ngIf="submitted && f['age'].errors">
+                        <small *ngIf="f['age'].errors['min']">La edad no puede ser negativa.</small>
+                        <small *ngIf="f['age'].errors['max']">La edad no puede superar 120 años.</small>
+                    </div>
                 </div>
 
                 <div class="col">
                     <label>Género</label>
                     <select formControlName="gender">
+                        <option value="">—</option>
                         <option value="Masculino">Masculino</option>
                         <option value="Femenino">Femenino</option>
                         <option value="Otro">Otro</option>
@@ -38,13 +51,21 @@
                 </div>
 
                 <div class="col">
-                    <label>Fecha</label>
-                    <input type="date" formControlName="appointmentDate" />
+                    <label>Fecha *</label>
+                    <input type="date" formControlName="appointmentDate"
+                        [class.invalid]="submitted && f['appointmentDate'].invalid" />
+                    <div class="error" *ngIf="submitted && f['appointmentDate'].errors">
+                        <small>La fecha es obligatoria.</small>
+                    </div>
                 </div>
 
                 <div class="col">
-                    <label>Hora</label>
-                    <input type="time" formControlName="appointmentTime" />
+                    <label>Hora *</label>
+                    <input type="time" formControlName="appointmentTime"
+                        [class.invalid]="submitted && f['appointmentTime'].invalid" />
+                    <div class="error" *ngIf="submitted && f['appointmentTime'].errors">
+                        <small>La hora es obligatoria.</small>
+                    </div>
                 </div>
 
                 <div class="col">
@@ -61,29 +82,30 @@
                 </div>
             </div>
 
+            <section class="suggestions">
+                <h4>Buscar paciente para prefills</h4>
+                <div class="col full">
+                    <input type="text" [formControl]="patientSearchControl" placeholder="Buscar paciente..." />
+                </div>
+
+                <div class="col full" *ngIf="matchedPatient">
+                    <p>Paciente encontrado: <strong>{{ matchedPatient.name ?? matchedPatient.patientName ??
+                            matchedPatient.fullName }}</strong></p>
+                    <button type="button" (click)="choosePatient(matchedPatient)">Usar datos del paciente</button>
+                </div>
+
+                <div class="col full" *ngIf="patientSearchControl.value && !matchedPatient">
+                    <p>No se encontró ningún paciente con ese nombre.</p>
+                </div>
+            </section>
+
             <div class="actions full">
                 <button type="submit" [disabled]="loading">Guardar</button>
                 <button type="button" routerLink="/dashboard/appointments">Cancelar</button>
             </div>
         </form>
 
-        <section class="suggestions">
-            <h4>Pacientes (seleccionar para prefills)</h4>
-            <div class="col full">
-                <input type="text" placeholder="Buscar paciente..." [(ngModel)]="patientSearch"
-                    (input)="filterPatients()" />
-                <select (change)="onPatientSelected($event)">
-                    <option *ngFor="let p of filteredPatients" [value]="p.id">
-                        {{ p.name ?? p.patientName ?? p.fullName }}
-                    </option>
-                </select>
-            </div>
-            <div class="patients-list">
-                <button *ngFor="let p of filteredPatients" type="button" (click)="choosePatient(p)">
-                    {{ p.name ?? p.patientName ?? p.fullName }}
-                </button>
-            </div>
-        </section>
+
 
     </div>
 </div>

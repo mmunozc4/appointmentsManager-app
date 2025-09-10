@@ -5,15 +5,24 @@
             <button class="close" (click)="close()">✕</button>
         </header>
 
-        <form (ngSubmit)="submit()" [formGroup]="patientForm" class="form-grid">
+        <form (ngSubmit)="submit()" [formGroup]="patientForm" class="form-grid" novalidate>
             <div class="col">
-                <label>Nombre</label>
-                <input formControlName="name" />
+                <label>Nombre *</label>
+                <input formControlName="name" [class.invalid]="submitted && f['name'].invalid" />
+                <div class="error" *ngIf="submitted && f['name'].errors">
+                    <small *ngIf="f['name'].errors['required']">El nombre es obligatorio.</small>
+                    <small *ngIf="f['name'].errors['minlength']">Debe tener al menos 3 caracteres.</small>
+                </div>
             </div>
 
             <div class="col">
-                <label>Teléfono</label>
-                <input formControlName="mobileNo" />
+                <label>Teléfono *</label>
+                <input formControlName="mobileNo" [class.invalid]="submitted && f['mobileNo'].invalid" />
+                <div class="error" *ngIf="submitted && f['mobileNo'].errors">
+                    <small *ngIf="f['mobileNo'].errors['required']">El teléfono es obligatorio.</small>
+                    <small *ngIf="f['mobileNo'].errors['pattern']">Formato inválido, solo números (7-15
+                        dígitos).</small>
+                </div>
             </div>
 
             <div class="col">
@@ -23,7 +32,11 @@
 
             <div class="col">
                 <label>Edad</label>
-                <input type="number" formControlName="age" />
+                <input type="number" formControlName="age" [class.invalid]="submitted && f['age'].invalid" />
+                <div class="error" *ngIf="submitted && f['age'].errors">
+                    <small *ngIf="f['age'].errors['min']">La edad no puede ser negativa.</small>
+                    <small *ngIf="f['age'].errors['max']">La edad no puede superar 120 años.</small>
+                </div>
             </div>
 
             <div class="col">

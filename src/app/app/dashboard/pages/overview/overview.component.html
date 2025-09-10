@@ -1,16 +1,21 @@
 <div class="dashboard">
+  <div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+    <p>Cargando datos del panel...</p>
+  </div>
+
   <div class="kpi-grid">
     <div class="kpi-card kpi-blue">
       <div class="kpi-icon"><i class="fas fa-users"></i></div>
       <div class="kpi-content">
-        <p>Total Pacientes</p>
+        <p>Total pacientes</p>
         <h3>{{ totalPatients }}</h3>
       </div>
     </div>
     <div class="kpi-card kpi-green">
       <div class="kpi-icon"><i class="fas fa-calendar-check"></i></div>
       <div class="kpi-content">
-        <p>Total Citas</p>
+        <p>Total citas registradas</p>
         <h3>{{ totalAppointments }}</h3>
       </div>
     </div>

@@ -19,28 +19,27 @@ export class PatientsFormComponent implements OnInit {
 
   patientForm: FormGroup;
   loading = false;
+  submitted = false;
 
   constructor(private fb: FormBuilder, private patientService: PatientService, private auth: AuthService) {
     this.patientForm = this.fb.group({
-      patientId: [0], // obligatorio para API
-      name: ['', Validators.required],
-      mobileNo: ['', Validators.required],
+      patientId: [0],
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      mobileNo: ['', [Validators.required, Validators.pattern(/^[0-9]{7,15}$/)]],
       city: [''],
-      age: [0],
+      age: [0, [Validators.min(0), Validators.max(120)]],
       gender: [''],
       hospitalId: [0, Validators.required]
     });
   }
 
   ngOnInit(): void {
-    // Prefill hospitalId desde usuario
     const u = this.auth.currentUser;
     const hid = u?.hospitalId ? Number(u.hospitalId) : null;
     if (hid) {
       this.patientForm.patchValue({ hospitalId: hid });
     }
 
-    // Prefill paciente si se pasa
     if (this.prefill) {
       const pid = Number(this.prefill.patientId ?? this.prefill.id ?? 0);
       this.patientForm.patchValue({
@@ -55,6 +54,7 @@ export class PatientsFormComponent implements OnInit {
   }
 
   submit(): void {
+    this.submitted = true;
     if (this.patientForm.invalid) return;
 
     this.loading = true;
@@ -87,5 +87,9 @@ export class PatientsFormComponent implements OnInit {
 
   close(): void {
     this.cancel.emit();
+  }
+
+  get f() {
+    return this.patientForm.controls;
   }
 }

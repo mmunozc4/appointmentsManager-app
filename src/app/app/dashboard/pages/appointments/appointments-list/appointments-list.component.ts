@@ -21,13 +21,11 @@ export class AppointmentsListComponent implements OnInit {
   appointments: any[] = [];
   filtered: any[] = [];
 
-  // filtros
   q = '';
   filterState: 'all' | 'pending' | 'done' = 'all';
   dateFrom: string = '';
   dateTo: string = '';
 
-  // detalle
   showDetail = false;
   selectedAppointment: any = null;
 

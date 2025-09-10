@@ -1,0 +1,10 @@
+{
+  "/api/Practo/*": {
+    "target": "https://freeapi.miniprojectideas.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/Practo/": "/api/Practo/"
+    }
+  }
+}

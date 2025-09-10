@@ -1,12 +1,10 @@
-/* Wrapper */
 .pt-list {
-    background: #f9f9fb;
+    background: var(--appBackground);
     border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 255, 255, 0.05) inset;
     padding: 1.8rem;
+    height: 100vh;
 }
 
-/* Header */
 .pt-header {
     display: flex;
     justify-content: space-between;
@@ -20,12 +18,11 @@
 }
 
 .pt-actions button {
-    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    background: linear-gradient(135deg, var(--btnColorSoft), var(--btnColorStrong));
     color: #fff;
     padding: 0.5rem 1rem;
     border-radius: 12px;
     border: none;
-    box-shadow: 2px 2px 6px rgba(79, 70, 229, 0.3), -2px -2px 6px rgba(99, 102, 241, 0.3);
     transition: all 0.2s;
 }
 
@@ -33,7 +30,6 @@
     transform: translateY(-1px);
 }
 
-/* Filters */
 .pt-filters {
     display: flex;
     flex-wrap: wrap;
@@ -44,7 +40,7 @@
 
 .filter-item label {
     font-weight: 600;
-    color: #555;
+    color: var(--textColor);
     display: block;
     margin-bottom: 0.2rem;
 }
@@ -65,7 +61,7 @@
 
 .pt-filters button {
     background: #f0f0f3;
-    color: #2b2b3a;
+    color: var(--textColor);
     box-shadow: 2px 2px 5px #d1d1d6, -2px -2px 5px #ffffff;
     padding: 0.5rem 1rem;
     border-radius: 12px;
@@ -75,11 +71,10 @@
 }
 
 .pt-filters button:hover {
-    background: #6366f1;
+    background: var(--btnColorSoft);
     color: #fff;
 }
 
-/* Table */
 .pt-table {
     width: 100%;
     border-collapse: collapse;
@@ -93,7 +88,7 @@
 }
 
 .pt-table th {
-    color: #555;
+    color: var(--textColor);
 }
 
 .actions-td button {
@@ -102,8 +97,7 @@
     padding: 0.3rem 0.5rem;
     border: none;
     color: #fff;
-    background: linear-gradient(135deg, #6366f1, #4f46e5);
-    box-shadow: 2px 2px 5px rgba(79, 70, 229, 0.3), -2px -2px 5px rgba(99, 102, 241, 0.3);
+    background: linear-gradient(135deg, var(--btnColorSoft), var(--btnColorStrong));
     transition: all 0.2s;
 }
 
@@ -112,14 +106,13 @@
 }
 
 .actions-td button:nth-child(2) {
-    background: linear-gradient(135deg, #4ade80, #16a34a);
+    background: var(--succesColor);
 }
 
 .actions-td button:nth-child(3) {
-    background: linear-gradient(135deg, #ef4444, #dc2626);
+    background: var(--errorColor);
 }
 
-/* Empty & Loading */
 .empty {
     text-align: center;
     color: #777;
@@ -130,10 +123,9 @@
 .pt-loading {
     text-align: center;
     padding: 1rem 0;
-    color: #6366f1;
+    color: var(--btnColorSoft);
 }
 
-/* Responsive */
 @media (max-width: 600px) {
     .pt-filters {
         flex-direction: column;
@@ -171,23 +163,19 @@
     .actions-td button {
         margin-bottom: 0.3rem;
         width: 90%;
-        /* botones ocupan toda la fila */
     }
 
     .filter-item {
         width: 90%;
-        /* cada filtro ocupa toda la fila */
     }
 
     .filter-item input,
     .filter-item select {
         width: 90%;
-        /* inputs y selects ocupan todo el ancho */
     }
 
     .button-filters {
         width: 90%;
-        /* botón de limpiar ocupa toda la fila */
     }
 
     .pt-list{

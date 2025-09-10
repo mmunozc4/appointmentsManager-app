@@ -14,7 +14,7 @@ import { AppointmentService } from '../../../../core/services/appointment.servic
 
 export class AppointmensDetailComponent {
   @Input() appointment: any = null;
-  @Output() close = new EventEmitter<boolean>(); // emitir true si se requiere refresh
+  @Output() close = new EventEmitter<boolean>(); 
 
   loading = false;
 

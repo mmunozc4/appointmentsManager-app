@@ -6,7 +6,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class AppointmentService {
 
-  private base = 'https://freeapi.miniprojectideas.com/api/Practo';
+  private base = '/api/Practo';
 
   constructor(private http: HttpClient) { }
 

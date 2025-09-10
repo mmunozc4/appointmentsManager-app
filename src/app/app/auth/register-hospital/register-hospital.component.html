@@ -9,66 +9,111 @@
                     </h3>
                 </header>
 
-                <form id="msform" (ngSubmit)="onSubmit()" [formGroup]="hospitalForm">
+                <form id="msform" (ngSubmit)="onSubmit()" [formGroup]="hospitalForm" novalidate>
+
+                    <!-- STEP 1 -->
                     <ng-container *ngIf="step === 1">
                         <div>
                             <div class="form__row">
-                                <input type="text" formControlName="hospitalName" placeholder="Nombre del hospital" />
+                                <input type="text" formControlName="hospitalName" placeholder="Nombre del hospital"
+                                    [class.is-invalid]="isInvalid('hospitalName')" />
+                                <div class="error" *ngIf="isInvalid('hospitalName')">
+                                    {{ getErrorMessage('hospitalName') }}
+                                </div>
                             </div>
+
                             <div class="form__row">
-                                <input type="text" formControlName="hospitalAddress" placeholder="Dirección" />
+                                <input type="text" formControlName="hospitalAddress" placeholder="Dirección"
+                                    [class.is-invalid]="isInvalid('hospitalAddress')" />
+                                <div class="error" *ngIf="isInvalid('hospitalAddress')">
+                                    {{ getErrorMessage('hospitalAddress') }}
+                                </div>
                             </div>
+
                             <div class="form__row">
-                                <input type="text" formControlName="hospitalCity" placeholder="Ciudad" />
+                                <input type="text" formControlName="hospitalCity" placeholder="Ciudad"
+                                    [class.is-invalid]="isInvalid('hospitalCity')" />
+                                <div class="error" *ngIf="isInvalid('hospitalCity')">
+                                    {{ getErrorMessage('hospitalCity') }}
+                                </div>
                             </div>
                         </div>
                     </ng-container>
 
+                    <!-- STEP 2 -->
                     <ng-container *ngIf="step === 2">
                         <div>
                             <div class="form__row">
-                                <input type="text" formControlName="hospitalContactNo"
-                                    placeholder="Teléfono hospital" />
+                                <input type="number" formControlName="hospitalContactNo" placeholder="Teléfono hospital"
+                                    [class.is-invalid]="isInvalid('hospitalContactNo')" />
+                                <div class="error" *ngIf="isInvalid('hospitalContactNo')">
+                                    {{ getErrorMessage('hospitalContactNo') }}
+                                </div>
                             </div>
+
                             <div class="form__row">
                                 <input type="text" formControlName="hospitalOwnerName"
-                                    placeholder="Nombre del propietario" />
+                                    placeholder="Nombre del propietario"
+                                    [class.is-invalid]="isInvalid('hospitalOwnerName')" />
+                                <div class="error" *ngIf="isInvalid('hospitalOwnerName')">
+                                    {{ getErrorMessage('hospitalOwnerName') }}
+                                </div>
                             </div>
+
                             <div class="form__row">
-                                <input type="text" formControlName="hospitalOwnerContactNo"
-                                    placeholder="Teléfono propietario" />
+                                <input type="number" formControlName="hospitalOwnerContactNo"
+                                    placeholder="Teléfono propietario"
+                                    [class.is-invalid]="isInvalid('hospitalOwnerContactNo')" />
+                                <div class="error" *ngIf="isInvalid('hospitalOwnerContactNo')">
+                                    {{ getErrorMessage('hospitalOwnerContactNo') }}
+                                </div>
                             </div>
                         </div>
                     </ng-container>
 
+                    <!-- STEP 3 -->
                     <ng-container *ngIf="step === 3">
                         <div>
                             <div class="form__row">
-                                <input type="email" formControlName="hospitalEmailId" placeholder="Email" />
+                                <input type="email" formControlName="hospitalEmailId" placeholder="Email"
+                                    [class.is-invalid]="isInvalid('hospitalEmailId')" />
+                                <div class="error" *ngIf="isInvalid('hospitalEmailId')">
+                                    {{ getErrorMessage('hospitalEmailId') }}
+                                </div>
                             </div>
+
                             <div class="form__row">
-                                <input type="text" formControlName="userName" placeholder="Usuario" />
+                                <input type="text" formControlName="userName" placeholder="Usuario"
+                                    [class.is-invalid]="isInvalid('userName')" />
+                                <div class="error" *ngIf="isInvalid('userName')">
+                                    {{ getErrorMessage('userName') }}
+                                </div>
                             </div>
+
                             <div class="form__row">
-                                <input type="password" formControlName="password" placeholder="Contraseña" />
+                                <input type="password" formControlName="password" placeholder="Contraseña"
+                                    [class.is-invalid]="isInvalid('password')" />
+                                <div class="error" *ngIf="isInvalid('password')">
+                                    {{ getErrorMessage('password') }}
+                                </div>
                             </div>
                         </div>
                     </ng-container>
 
+                    <!-- BUTTONS -->
                     <div class="form__row form__button">
                         <button type="button" class="action-button" *ngIf="step > 1" (click)="prevStep()">
                             Anterior
                         </button>
-                        <button type="button" class="action-button" *ngIf="step < 3" (click)="nextStep()"
-                            [disabled]="!isStepValid()">
+                        <button type="button" class="action-button" *ngIf="step < 3" (click)="nextStep()">
                             Siguiente
                         </button>
-                        <button class="action-button" type="submit" *ngIf="step === 3"
-                            [disabled]="hospitalForm.invalid || loading">
+                        <button class="action-button" type="submit" *ngIf="step === 3">
                             {{ loading ? 'Guardando...' : 'Registrar' }}
                         </button>
                     </div>
 
+                    <!-- MENSAJES -->
                     <div class="form__row success" *ngIf="successMessage">{{ successMessage }}</div>
                     <div class="form__row error" *ngIf="errorMessage">{{ errorMessage }}</div>
                 </form>

@@ -1,11 +1,10 @@
 <div class="ap-list body-content card">
     <div class="ap-header header">
         <div class="ap-title">
-            <h2>Appointments</h2>
+            <h2>Citas</h2>
         </div>
 
         <div class="ap-actions">
-            <!-- botón con clase del template -->
             <button class="button primary" routerLink="/dashboard/appointments/new">
                 <i claAss="icon-plus fa-solid fa-plus"></i> Nueva cita
             </button>
@@ -85,7 +84,6 @@
         </table>
     </div>
 
-    <!-- Modal -->
     <app-appointmens-detail *ngIf="showDetail" [appointment]="selectedAppointment" (close)="onDetailClosed($event)">
     </app-appointmens-detail>
 </div>

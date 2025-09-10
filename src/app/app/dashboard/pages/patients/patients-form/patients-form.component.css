@@ -1,11 +1,12 @@
-/* Modal backdrop */
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.35);
+  background-color: #2e2e2e6f;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +14,6 @@
   z-index: 1000;
 }
 
-/* Modal */
 .modal {
   background: #f9f9fb;
   border-radius: 16px;
@@ -23,7 +23,6 @@
   animation: fadeIn 0.4s ease-in-out;
 }
 
-/* Header */
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -37,23 +36,14 @@
 }
 
 .modal-header .close {
-  font-size: 1.2rem;
-  background: #f0f0f3;
-  border-radius: 50%;
-  padding: 0.2rem 0.5rem;
-  border: none;
-  color: #555;
-  box-shadow: 2px 2px 5px #d1d1d6, -2px -2px 5px #ffffff;
-  cursor: pointer;
-  transition: all 0.2s;
+    font-size: 1.2rem;
+    padding: 0.2rem 0.5rem;
+    border: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    background: #f9f9fb;
 }
 
-.modal-header .close:hover {
-  background: #ef4444;
-  color: #fff;
-}
-
-/* Form grid */
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -68,7 +58,7 @@
 .form-grid label {
   font-weight: 600;
   margin-bottom: 0.3rem;
-  color: #555;
+  color: var(--textColor);
 }
 
 .form-grid input,
@@ -87,7 +77,6 @@
   outline: none;
 }
 
-/* Actions buttons */
 .actions.full {
   display: flex;
   justify-content: flex-end;
@@ -100,8 +89,7 @@
   border-radius: 12px;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
-  box-shadow: 2px 2px 6px rgba(79, 70, 229, 0.3), -2px -2px 6px rgba(99, 102, 241, 0.3);
+  background: var(--btnColorSoft);
   border: none;
   cursor: pointer;
   transition: all 0.2s;

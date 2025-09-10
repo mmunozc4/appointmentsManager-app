@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private base = 'https://freeapi.miniprojectideas.com/api/Practo';
+  private base = '/api/Practo';
 
   private currentUserSubject = new BehaviorSubject<any>(this.getUserFromStorage());
   currentUser$ = this.currentUserSubject.asObservable();

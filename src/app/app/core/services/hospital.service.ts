@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HospitalService {
-  private base = 'https://freeapi.miniprojectideas.com/api/Practo';
+  private base = '/api/Practo';
 
   constructor(private http: HttpClient) { }
 

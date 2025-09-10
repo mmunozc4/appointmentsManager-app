@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, Validators, FormGroup, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators, FormGroup, FormsModule, FormControl } from '@angular/forms';
 
 import { AppointmentService } from '../../../../core/services/appointment.service';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -20,6 +20,11 @@ export class AppointmensFormComponent implements OnInit {
   filteredPatients: any[] = [];
   patientSearch = '';
   loading = false;
+  submitted = false;
+
+  patientSearchControl = new FormControl('');
+  matchedPatient: any = null;
+
 
   constructor(
     private fb: FormBuilder,
@@ -29,12 +34,12 @@ export class AppointmensFormComponent implements OnInit {
     private router: Router
   ) {
     this.appointmentForm = this.fb.group({
-      name: ['', Validators.required],
-      mobileNo: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      mobileNo: ['', [Validators.required, Validators.pattern(/^[0-9]{7,15}$/)]],
       city: [''],
-      age: [0],
+      age: [0, [Validators.min(0), Validators.max(120)]],
       gender: [''],
-      appointmentDate: ['', Validators.required],
+      appointmentDate: [Date, Validators.required],
       appointmentTime: ['', Validators.required],
       isFirstVisit: [true],
       naration: [''],
@@ -57,6 +62,13 @@ export class AppointmensFormComponent implements OnInit {
         error: (err: any) => console.error(err),
       });
     }
+    this.patientSearchControl.valueChanges.subscribe((term: string | null) => {
+      const lowered = (term ?? '').toLowerCase().trim();
+      this.matchedPatient = this.patientsList.find(p =>
+        (p.name ?? p.patientName ?? p.fullName ?? '').toLowerCase().includes(lowered)
+      );
+    });
+
   }
 
   filterPatients() {
@@ -77,7 +89,6 @@ export class AppointmensFormComponent implements OnInit {
     }
   }
 
-  /** 👇 método faltante */
   choosePatient(p: any) {
     this.prefillPatientToForm(p);
   }
@@ -93,9 +104,13 @@ export class AppointmensFormComponent implements OnInit {
   }
 
   submit() {
-    if (this.appointmentForm.invalid) return;
+    this.submitted = true;
+    if (this.appointmentForm.invalid) {
+      return;
+    }
+
     this.loading = true;
-    const payload = this.appointmentForm.value;
+    const payload = { ...this.appointmentForm.value };
 
     if (payload.appointmentDate && !payload.appointmentDate.includes('T')) {
       payload.appointmentDate = new Date(payload.appointmentDate).toISOString();
@@ -112,5 +127,9 @@ export class AppointmensFormComponent implements OnInit {
         alert('Error creando cita');
       }
     });
+  }
+
+  get f() {
+    return this.appointmentForm.controls;
   }
 }

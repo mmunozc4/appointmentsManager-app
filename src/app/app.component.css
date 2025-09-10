@@ -3,5 +3,5 @@
 }
 
 .backgroundLogged{
-    background-color: #fff !important;
+    background-color: var(--appBackground) !important;
 }

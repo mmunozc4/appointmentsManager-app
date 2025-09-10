@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -14,7 +15,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class LoginComponent {
   private _snackBar = inject(MatSnackBar);
-
   loginForm: FormGroup;
   isLoading = false;
 
@@ -44,10 +44,11 @@ export class LoginComponent {
 
         this.isLoading = false;
         if (res?.data) {
-          alert('Login exitoso');
           this.router.navigateByUrl('/dashboard');
         } else {
-          alert('⚠️ Credenciales incorrectas');
+          this._snackBar.open('⚠️ Credenciales incorrectas', 'cerrar', {
+            duration: 3000
+          });
         }
       },
       error: (err) => {

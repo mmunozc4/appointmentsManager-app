@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule, NgIf, NgFor } from '@angular/common';
-import { Subject, forkJoin } from 'rxjs';
-import { takeUntil, finalize } from 'rxjs/operators';
+import { Subject, forkJoin, of } from 'rxjs';
+import { takeUntil, finalize, catchError } from 'rxjs/operators';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { PatientService } from '../../../core/services/patient.service';
@@ -59,16 +59,15 @@ export class OverviewComponent implements OnInit, OnDestroy {
     this.isLoading = true;
 
     forkJoin({
-      patients: this.patientService.getAllPatientsByHospitalId(this.hospitalId),
-      appointments: this.appointmentService.getAllAppointmentsByHospitalid(this.hospitalId),
-      todays: this.appointmentService.getTodaysAppointments()
+      patients: this.patientService.getAllPatientsByHospitalId(this.hospitalId).pipe(catchError(() => of([]))),
+      appointments: this.appointmentService.getAllAppointmentsByHospitalid(this.hospitalId).pipe(catchError(() => of([])))
     })
       .pipe(
         takeUntil(this.destroy$),
         finalize(() => (this.isLoading = false))
       )
       .subscribe({
-        next: ({ patients, appointments, todays }: any) => {
+        next: ({ patients, appointments }: any) => {
           const patientsArr: any[] = Array.isArray(patients) ? patients : (patients?.data ?? []);
           this.totalPatients = patientsArr.length;
 
@@ -92,8 +91,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
           const doneCount = apptsArr.filter((a) => this.isAppointmentDone(a)).length;
           this.pendingAppointments = Math.max(0, this.totalAppointments - doneCount);
 
-          const todaysArr: any[] = Array.isArray(todays) ? todays : (todays?.data ?? []);
-          const todaysFiltered = todaysArr.filter((a) => Number(a.hospitalId) === Number(this.hospitalId));
+          const todaysFiltered = apptsArr.filter((a) => this.isToday(a.appointmentDate) && !this.isAppointmentDone(a));
           this.todaysAppointments = todaysFiltered.length;
 
           this.upcomingAppointments = todaysFiltered
@@ -177,6 +175,18 @@ export class OverviewComponent implements OnInit, OnDestroy {
       const db = new Date(b[foundField]).getTime() || 0;
       return da - db;
     });
+  }
+
+  private isToday(dateStr: string): boolean {
+    if (!dateStr) return false;
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return false;
+    const today = new Date();
+    return (
+      d.getDate() === today.getDate() &&
+      d.getMonth() === today.getMonth() &&
+      d.getFullYear() === today.getFullYear()
+    );
   }
 
   ngOnDestroy(): void {
