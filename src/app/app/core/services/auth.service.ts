@@ -3,12 +3,14 @@ import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private base = '/api/Practo';
+  private base = environment.apiBase;
 
   private currentUserSubject = new BehaviorSubject<any>(this.getUserFromStorage());
   currentUser$ = this.currentUserSubject.asObservable();
