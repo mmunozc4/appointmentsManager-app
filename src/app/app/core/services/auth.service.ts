@@ -15,7 +15,7 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<any>(this.getUserFromStorage());
   currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) { }
 
   private isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
@@ -28,15 +28,25 @@ export class AuthService {
   }
 
   login(credentials: { userName: string; password: string }) {
+    console.log('🔑 Intentando login con:', credentials);
+    console.log('🌐 Endpoint:', `${this.base}/Login`);
+
     return this.http.post(`${this.base}/Login`, credentials).pipe(
-      tap((res: any) => {
-        if (res?.data?.hospitalId && this.isBrowser()) {
-          localStorage.setItem('userLogin', JSON.stringify(res.data));
-          this.currentUserSubject.next(res.data); 
+      tap({
+        next: (res: any) => {
+          console.log('✅ Respuesta login:', res);
+          if (res?.data?.hospitalId && this.isBrowser()) {
+            localStorage.setItem('userLogin', JSON.stringify(res.data));
+            this.currentUserSubject.next(res.data);
+          }
+        },
+        error: (err) => {
+          console.error('❌ Error en login:', err);
         }
       })
     );
   }
+
 
   logout() {
     if (this.isBrowser()) {
